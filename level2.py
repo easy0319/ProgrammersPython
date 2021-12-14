@@ -1,4 +1,58 @@
-#%% 프로그래머스 2단계 (전화번호목록)
+
+
+#%% 프로그래머스 2단계 (피보나치)
+def solution(n):
+    line = [0, 1]
+    for i in range(2, n + 1):
+        line.append((line[i - 2] + line[i - 1])%1234567)
+    return line[-1]
+print(solution(3))
+#%% 프로그래머스 2단계 (최솟값 만들기)
+def solution(A,B):
+    answer = 0
+    s_A = sorted(A)
+    s_B = sorted(B)
+    for i in range(len(A)):
+        answer += s_A[i] * s_B[-(i + 1)]
+    return answer
+
+print(solution([1, 4, 2], [4, 5, 4]))
+#%% 프로그래머스 2단계 (최대값과 최소값)
+def solution(s):
+    st = sorted(s.split(' '))
+    st = list(map(int, st))
+    return str(min(st)) + ' ' + str(max(st))
+
+print(solution("-1 -2 -3 -4"))
+#%% 프로그래머스 2단계 (숫자의 표현)
+def solution(n):
+    answer = 1 #자기자신 카운트 
+    
+    for i in range(1, n):
+        a, b = i, i + 1
+        for j in range(n - i):
+            if a == n:
+                answer += 1
+                break
+            elif a > n:
+                break
+            else:   
+                a, b = a + b, b + 1
+    return answer
+print(solution(15))
+#%% 프로그래머스 2단계 (다음 큰 숫자)
+
+def solution(n):
+    a = str(bin(n)).count('1')
+    i = 1
+    while True:
+        if str(bin(n+i)).count('1') == a:
+            return n+i
+        else:
+            i += 1
+print(solution(78))
+
+#%% 프로그래머스 2단계 (전화번호목록) - 해시
 def solution(phone_book):
     set_ph = sorted(list(map(str, set(phone_book))))    #정렬
 
@@ -9,7 +63,7 @@ def solution(phone_book):
                 
     return True
 print(solution(["119", "97674223", "1195524421"]))
-#%% 프로그래머스 2단계 (기능개발)
+#%% 프로그래머스 2단계 (기능개발) - 스택큐
 def solution(progresses, speeds):
     answer = []
     return answer
