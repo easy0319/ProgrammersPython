@@ -79,7 +79,6 @@ def solution(progresses, speeds):
             queue.pop()
     return answer
 print(solution([93, 30, 55], [1, 30, 5]))  
-
 #%% 프로그래머스 2단계 (프린터) - 스택큐
 #%% 프로그래머스 2단계 (더맵게) - 스택큐
 #%% 프로그래머스 2단계 (타겟넘버) - 힙
