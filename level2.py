@@ -80,11 +80,46 @@ def solution(progresses, speeds):
     return answer
 print(solution([93, 30, 55], [1, 30, 5]))  
 #%% 프로그래머스 2단계 (프린터) - 스택큐
-#%% 프로그래머스 2단계 (더맵게) - 스택큐
-#%% 프로그래머스 2단계 (타겟넘버) - 힙
-#%% 프로그래머스 2단계 (가장큰수) - 깊이너비
-#%% 프로그래머스 2단계 (위장) - 정렬
-#%% 프로그래머스 2단계 (H-index) - 해시
+#%% 프로그래머스 2단계 (더맵게) - 힙 @효율성 0점 
+import heapq
+def solution(scoville, K):
+    answer = 0
+    heap = scoville
+    while heap:
+        a = heapq.heappop(heap)
+        b = heapq.heappop(heap)
+        heapq.heappush(heap, a + int(b * 2))
+        print(heap)
+print(solution([1, 2, 3, 9, 10, 12],7))
+#%% 프로그래머스 2단계 (타겟넘버) - 깊이너비
+#%% 프로그래머스 2단계 (가장큰수) - 정렬 @효율성 0점
+def solution(numbers):
+    answer = ''
+    s_num = numbers.copy()
+    n_len = int('1' * len(str(max(numbers))))
+
+    for i in range(len(s_num)):
+        if len(str(s_num[i])) < len(str(max(s_num))):
+            s_num[i] *= n_len
+    
+    s_num = sorted(s_num)
+    print(s_num)
+    while s_num:
+        j = s_num.pop()
+        if s_num and int(j / n_len) == int(s_num[-1] / n_len):
+            answer += str(max(j, s_num[-1]))
+        else:
+            if int(j / n_len) in numbers:
+                answer += str(int(j / n_len))
+            else:
+                answer += str(int(j))
+
+    return answer
+print(solution([1, 10, 100, 1000]))
+#%% 프로그래머스 2단계 (위장) - 해시
+#%% 프로그래머스 2단계 (H-index) - 정렬
+
+
 #%% 프로그래머스 2단계 (다리를지나는트럭) - 스택큐
 #%% 프로그래머스 2단계 (주식가격) - 스택큐
 def solution(prices):
@@ -100,4 +135,3 @@ def solution(prices):
         answer.append(count)
     return answer
 print(solution([1,2,3,2,3]))
-#%%
