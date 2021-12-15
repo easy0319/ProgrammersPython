@@ -64,8 +64,22 @@ print(solution(["119", "97674223", "1195524421"]))
 #%% 프로그래머스 2단계 (기능개발) - 스택큐
 def solution(progresses, speeds):
     answer = []
+    queue = [0] * len(progresses)
+    for i in range(len(progresses)):
+        while progresses[i] < 100:
+            queue[i] += 1
+            progresses[i] += speeds[i]
+    print(queue)
+    queue.reverse()         #숫자 뒤집어주기
+    while queue:
+        answer.append(1)    #첫번째는 무조건 +1
+        j = queue.pop()
+        while queue and j >= queue[-1]: #큐가 비어있지 않고 현재의 값이 그 다음값보다 클때 수행
+            answer[-1] += 1
+            queue.pop()
     return answer
 print(solution([93, 30, 55], [1, 30, 5]))  
+
 #%% 프로그래머스 2단계 (프린터) - 스택큐
 #%% 프로그래머스 2단계 (더맵게) - 스택큐
 #%% 프로그래머스 2단계 (타겟넘버) - 힙
@@ -76,22 +90,15 @@ print(solution([93, 30, 55], [1, 30, 5]))
 #%% 프로그래머스 2단계 (주식가격) - 스택큐
 def solution(prices):
     answer = []
-    if len(prices) < 2 and len(prices) > 100000:
-        return -1
-    
     for i in range(len(prices)):
         count = 0
-        j = i + 1
-        while j < len(prices):
+        for j in range(i + 1, len(prices)):
             if prices[i] <= prices[j]:
                 count += 1
-                j += 1
-            elif prices.index(prices[i]) + 1 <= len(prices):
+            else:
                 count += 1
                 break
-            else:
-                break            
         answer.append(count)
     return answer
 print(solution([1,2,3,2,3]))
-#%%[3, 1, 1, 2, 1, 0]    [5, 8, 6, 2, 4, 1]
+#%%
