@@ -80,19 +80,22 @@ def solution(progresses, speeds):
     return answer
 print(solution([93, 30, 55], [1, 30, 5]))  
 #%% 프로그래머스 2단계 (프린터) - 스택큐
-#%% 프로그래머스 2단계 (더맵게) - 힙 @효율성 0점 
+#%% 프로그래머스 2단계 (더맵게) - 힙
 import heapq
 def solution(scoville, K):
     answer = 0
-    heap = scoville
-    while heap:
-        a = heapq.heappop(heap)
-        b = heapq.heappop(heap)
-        heapq.heappush(heap, a + int(b * 2))
-        print(heap)
-print(solution([1, 2, 3, 9, 10, 12],7))
+    heapq.heapify(scoville)
+
+    while scoville:
+        if scoville[0] > K:
+            return answer
+        heapq.heappush(scoville, heapq.heappop(scoville) + heapq.heappop(scoville) * 2)
+        answer += 1
+
+    return -1
+print(solution([3, 2, 1, 9, 10, 12],7))
 #%% 프로그래머스 2단계 (타겟넘버) - 깊이너비
-#%% 프로그래머스 2단계 (가장큰수) - 정렬 @효율성 0점
+#%% 프로그래머스 2단계 (가장큰수) - 정렬 @미완성
 def solution(numbers):
     answer = ''
     s_num = numbers.copy()
