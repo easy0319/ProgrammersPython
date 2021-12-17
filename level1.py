@@ -8,9 +8,10 @@ for i in range(b):
 #%% 프로그래머스 1단계 (x만큼 간격이 있는 n개의 숫자)
 def solution(x, n):
     answer = []
-    for i in range(n):    
+    for i in range(n):
         answer.append(x*(i+1))
     return answer
+print(solution(2,3))
 #%% 프로그래머스 1단계 (행렬의 덧셈)
 def solution(arr1, arr2):
     answer = []
@@ -216,3 +217,51 @@ def solution(answers):
     return answer
 
 print(solution([1,3,2,4,2]))
+#%% 행렬 테두리 회전하기
+def solution(rows, columns, queries):
+    answer = []
+    arr = []
+    for i in range(1, rows * columns + 1, +columns):
+        line = []
+        for j in range(columns):
+            line.append(i + j)
+        arr.append(line)
+
+
+    for i in range(len(queries)):
+        a = arr[queries[i][0] - 1][queries[i][1] - 1] #왼쪽 위 값 저장
+        print(a)
+        #가로의 길이 index[3] - index[1]
+        #세로의 길이 index[2] - index[0]
+        #왼쪽 변경
+        for j in range(queries[i][0] - 1, queries[i][2] - 1):
+            # print(arr[j][queries[i][1] - 1])
+            arr[j][queries[i][1] - 1] = arr[j + 1][queries[i][1] - 1]
+            answer.append(arr[j][queries[i][1] - 1])
+        #아래 변경
+        for j in range(queries[i][1] - 1, queries[i][3] - 1):
+            # print(arr[queries[i][2] - 1][j])
+            arr[queries[i][2] - 1][j] = arr[queries[i][2] - 1][j + 1]
+            answer.append(arr[queries[i][2] - 1][j])
+        # #오른쪽 변경
+        for j in range(queries[i][2] - 1, queries[i][0] - 1, -1):
+            # print(arr[j][queries[i][3] - 1])
+            arr[j][queries[i][3] - 1] = arr[j - 1][queries[i][3] - 1]
+            answer.append(arr[j][queries[i][3] - 1])
+        # #위 변경
+        for j in range(queries[i][3] - 1, queries[i][1], -1):
+            # print(arr[queries[i][0] - 1][j])
+            arr[queries[i][0] - 1][j] = arr[queries[i][0] - 1][j - 1]
+            answer.append(arr[queries[i][0] - 1][j])
+            if j - 1 == queries[i][1]:
+                arr[queries[i][0] - 1][j-1] = a
+                answer.append(a)
+        
+        for j in range(rows):
+            print(arr[j])
+        print()
+        
+    return min(set(answer))
+print(solution(6, 6, [[2,2,5,4],[3,3,6,6],[5,1,6,3]]))
+# print(solution(3, 3, [[1,1,2,2],[1,2,2,3],[2,1,3,2],[2,2,3,3]]))
+# print(solution(100, 97, [[1,1,100,97]]))
