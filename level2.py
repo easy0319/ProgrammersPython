@@ -138,3 +138,43 @@ def solution(prices):
         answer.append(count)
     return answer
 print(solution([1,2,3,2,3]))
+#%% 프로그래머스 2단계 (행렬 테두리 회전하기)
+def solution(rows, columns, queries):
+    answer = []
+    arr = []
+    #init
+    for i in range(1, rows * columns + 1, +columns):
+        line = []
+        for j in range(columns):
+            line.append(i + j)
+        arr.append(line)
+
+    for i in range(len(queries)):
+        if i == 0 and queries[i][2] == rows and queries[i][3] == columns:
+            answer.append(1)
+            continue
+        min_ = [];
+        a = arr[queries[i][0] - 1][queries[i][1] - 1] #왼쪽 위 값 저장
+        #왼쪽 변경
+        for j in range(queries[i][0] - 1, queries[i][2] - 1):
+            arr[j][queries[i][1] - 1] = arr[j + 1][queries[i][1] - 1]
+            min_.append(arr[j][queries[i][1] - 1])
+        #아래 변경
+        for j in range(queries[i][1] - 1, queries[i][3] - 1):
+            arr[queries[i][2] - 1][j] = arr[queries[i][2] - 1][j + 1]
+            min_.append(arr[queries[i][2] - 1][j])
+        # #오른쪽 변경
+        for j in range(queries[i][2] - 1, queries[i][0] - 1, -1):
+            arr[j][queries[i][3] - 1] = arr[j - 1][queries[i][3] - 1]
+            min_.append(arr[j][queries[i][3] - 1])
+        # #위 변경
+        for j in range(queries[i][3], queries[i][1], -1):
+            arr[queries[i][0] - 1][j - 1] = arr[queries[i][0] - 1][j - 2]
+            min_.append(arr[queries[i][0] - 1][j - 1])
+            if j - 1 == queries[i][1]:
+                arr[queries[i][0] - 1][j - 1] = a
+                min_.append(a)
+        answer.append(min(min_))
+    return answer
+print(solution(6, 6, [[2,2,5,4],[3,3,6,6],[5,1,6,3]]))
+#%%
