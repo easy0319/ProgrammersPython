@@ -218,3 +218,6 @@ def solution(answers):
 
 print(solution([1,3,2,4,2]))
 #%%
+import getpass
+password = getpass.getpass('>>')
+print(password)
