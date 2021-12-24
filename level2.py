@@ -95,28 +95,24 @@ def solution(scoville, K):
     return -1
 print(solution([3, 2, 1, 9, 10, 12],7))
 #%% 프로그래머스 2단계 (타겟넘버) - 깊이너비
-#%% 프로그래머스 2단계 (가장큰수) - 정렬 @미완성
+#%% 프로그래머스 2단계 (가장큰수) - 정렬
 def solution(numbers):
     answer = ''
-    s_num = numbers.copy()
-    n_len = int('1' * len(str(max(numbers))))
-
-    for i in range(len(s_num)):
-        if len(str(s_num[i])) < len(str(max(s_num))):
-            s_num[i] *= n_len
+    line = []
     
-    s_num = sorted(s_num)
-    print(s_num)
-    while s_num:
-        j = s_num.pop()
-        if s_num and int(j / n_len) == int(s_num[-1] / n_len):
-            answer += str(max(j, s_num[-1]))
-        else:
-            if int(j / n_len) in numbers:
-                answer += str(int(j / n_len))
-            else:
-                answer += str(int(j))
-
+    sum_ = sum(numbers)
+    if sum_ == 0:
+        return '0'
+    
+    for i in range(len(numbers)):
+        line.append([str(numbers[i])*4, len(str(numbers[i]))])
+    
+    line.sort()
+    
+    for i in range(len(line)):
+        j = line.pop()
+        answer += j[0][:j[1]]
+    
     return answer
 print(solution([1, 10, 100, 1000]))
 #%% 프로그래머스 2단계 (위장) - 해시
