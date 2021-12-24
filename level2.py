@@ -95,7 +95,7 @@ def solution(scoville, K):
     return -1
 print(solution([3, 2, 1, 9, 10, 12],7))
 #%% 프로그래머스 2단계 (타겟넘버) - 깊이너비
-#%% 프로그래머스 2단계 (가장큰수) - 정렬 @미완성
+#%% 프로그래머스 2단계 (가장큰수) - 정렬
 def solution(numbers):
     answer = ''
     line = []
