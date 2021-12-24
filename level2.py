@@ -98,24 +98,23 @@ print(solution([3, 2, 1, 9, 10, 12],7))
 #%% 프로그래머스 2단계 (가장큰수) - 정렬 @미완성
 def solution(numbers):
     answer = ''
-    s_num = numbers.copy()
-    n_len = int('1' * len(str(max(numbers))))
+    new_nums = list(map(str, numbers))
 
-    for i in range(len(s_num)):
-        if len(str(s_num[i])) < len(str(max(s_num))):
-            s_num[i] *= n_len
-    
-    s_num = sorted(s_num)
-    print(s_num)
-    while s_num:
-        j = s_num.pop()
-        if s_num and int(j / n_len) == int(s_num[-1] / n_len):
-            answer += str(max(j, s_num[-1]))
-        else:
-            if int(j / n_len) in numbers:
-                answer += str(int(j / n_len))
-            else:
-                answer += str(int(j))
+    new_nums = sorted(new_nums)
+    print(new_nums)
+    for i in range(len(new_nums)):
+        if len(new_nums[i]) == 1:
+            new_nums[i] += new_nums[i] + new_nums[i]
+        elif len(new_nums[i]) == 2:
+            new_nums[i] += new_nums[i][0]
+    print(new_nums)
+    new_nums = sorted(new_nums)
+    print(new_nums)
+
+    for i in range(len(new_nums)):
+        if len(new_nums) > 1 and new_nums[-1] == '1000':
+            new_nums[-1], new_nums[-2] = new_nums[-2], new_nums[-1]
+        answer += new_nums.pop()
 
     return answer
 print(solution([1, 10, 100, 1000]))
