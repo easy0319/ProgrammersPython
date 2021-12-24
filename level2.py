@@ -98,24 +98,21 @@ print(solution([3, 2, 1, 9, 10, 12],7))
 #%% 프로그래머스 2단계 (가장큰수) - 정렬 @미완성
 def solution(numbers):
     answer = ''
-    new_nums = list(map(str, numbers))
-
-    new_nums = sorted(new_nums)
-    print(new_nums)
-    for i in range(len(new_nums)):
-        if len(new_nums[i]) == 1:
-            new_nums[i] += new_nums[i] + new_nums[i]
-        elif len(new_nums[i]) == 2:
-            new_nums[i] += new_nums[i][0]
-    print(new_nums)
-    new_nums = sorted(new_nums)
-    print(new_nums)
-
-    for i in range(len(new_nums)):
-        if len(new_nums) > 1 and new_nums[-1] == '1000':
-            new_nums[-1], new_nums[-2] = new_nums[-2], new_nums[-1]
-        answer += new_nums.pop()
-
+    line = []
+    
+    sum_ = sum(numbers)
+    if sum_ == 0:
+        return '0'
+    
+    for i in range(len(numbers)):
+        line.append([str(numbers[i])*4, len(str(numbers[i]))])
+    
+    line.sort()
+    
+    for i in range(len(line)):
+        j = line.pop()
+        answer += j[0][:j[1]]
+    
     return answer
 print(solution([1, 10, 100, 1000]))
 #%% 프로그래머스 2단계 (위장) - 해시
