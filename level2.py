@@ -39,7 +39,6 @@ def solution(n):
     return answer
 print(solution(15))
 #%% 프로그래머스 2단계 (다음 큰 숫자)
-
 def solution(n):
     a = str(bin(n)).count('1')
     i = 1
@@ -79,7 +78,6 @@ def solution(progresses, speeds):
             queue.pop()
     return answer
 print(solution([93, 30, 55], [1, 30, 5]))  
-#%% 프로그래머스 2단계 (프린터) - 스택큐
 #%% 프로그래머스 2단계 (더맵게) - 힙
 import heapq
 def solution(scoville, K):
@@ -94,7 +92,6 @@ def solution(scoville, K):
 
     return -1
 print(solution([3, 2, 1, 9, 10, 12],7))
-#%% 프로그래머스 2단계 (타겟넘버) - 깊이너비
 #%% 프로그래머스 2단계 (가장큰수) - 정렬
 def solution(numbers):
     answer = ''
@@ -115,11 +112,6 @@ def solution(numbers):
     
     return answer
 print(solution([1, 10, 100, 1000]))
-#%% 프로그래머스 2단계 (위장) - 해시
-#%% 프로그래머스 2단계 (H-index) - 정렬
-
-
-#%% 프로그래머스 2단계 (다리를지나는트럭) - 스택큐
 #%% 프로그래머스 2단계 (주식가격) - 스택큐
 def solution(prices):
     answer = []
@@ -173,4 +165,21 @@ def solution(rows, columns, queries):
         answer.append(min(min_))
     return answer
 print(solution(6, 6, [[2,2,5,4],[3,3,6,6],[5,1,6,3]]))
-#%%
+#%% 프로그래머스 2단계 (구명보트) - 그리디
+from collections import deque
+def solution(people, limit):
+    answer = 0
+    people.sort()
+    deq = deque(people)
+    while deq:
+        i = deq.pop()
+        if deq and i + deq[0] <= limit:
+            deq.popleft()
+        answer += 1
+    return answer
+print(solution([70, 50, 80, 50],100))
+#%% 프로그래머스 2단계 (위장) - 해시
+#%% 프로그래머스 2단계 (H-index) - 정렬
+#%% 프로그래머스 2단계 (다리를지나는트럭) - 스택큐
+#%% 프로그래머스 2단계 (프린터) - 스택큐
+#%% 프로그래머스 2단계 (타겟넘버) - 깊이너비
