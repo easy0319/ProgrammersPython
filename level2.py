@@ -178,6 +178,26 @@ def solution(people, limit):
         answer += 1
     return answer
 print(solution([70, 50, 80, 50],100))
+#%% 프로그래머스 2단계 (큰 수 만들기) - 그리디
+def solution(number, k):
+    answer = []
+    for i in number:
+        if not answer:
+            answer.append(i)
+            continue
+
+        if k > 0:
+            while answer[-1] < i:
+                answer.pop()
+                k -= 1
+                if not answer or k <= 0:
+                    break
+        answer.append(i)
+    if k > 0:
+        answer = answer[:-k]
+
+    return ''.join(answer)
+print(solution("1924", 2))
 #%% 프로그래머스 2단계 (위장) - 해시
 #%% 프로그래머스 2단계 (H-index) - 정렬
 #%% 프로그래머스 2단계 (다리를지나는트럭) - 스택큐
