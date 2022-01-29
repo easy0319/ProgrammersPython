@@ -80,6 +80,7 @@ def solution(progresses, speeds):
 print(solution([93, 30, 55], [1, 30, 5]))  
 #%% 프로그래머스 2단계 (더맵게) - 힙
 import heapq
+from turtle import width
 def solution(scoville, K):
     answer = 0
     heapq.heapify(scoville)
@@ -166,7 +167,7 @@ def solution(rows, columns, queries):
     return answer
 print(solution(6, 6, [[2,2,5,4],[3,3,6,6],[5,1,6,3]]))
 #%% 프로그래머스 2단계 (구명보트) - 그리디
-from collections import deque
+from collections import deque #앞 뒤로 pop 가능
 def solution(people, limit):
     answer = 0
     people.sort()
@@ -193,13 +194,76 @@ def solution(number, k):
                 if not answer or k <= 0:
                     break
         answer.append(i)
+
     if k > 0:
         answer = answer[:-k]
 
     return ''.join(answer)
 print(solution("1924", 2))
+#%% 프로그래머스 2단계 (조이스틱) - 그리디
+def solution(name):
+    line = []
+    answer = 0
+    cnt = 0
+    for i in range(len(name)):
+        line.append(ord(name[i]))
+
+    for i in range(len(line)):
+        if line[i] == 65:
+            if cnt == 0:
+                cnt += ((i-1) * 2)
+                for i in range(len(line)-1, 0, -1):
+                    c = 1
+                    if line[i] != 65:
+                        cnt += c + 1
+                        break
+                    c += 1
+            continue
+        elif line[i] > 77:
+            answer += (91 - line[i])
+        elif line[i] <= 77:
+            answer += (line[i] - 65)
+
+    print(cnt)
+    if cnt < len(line) - 1:
+        answer += cnt
+    else:
+        answer += len(line)
+    return answer
+
+print(solution("BAAAABAABA"))
+# print(solution("AJZIEN"))
+#%% 이것이 코딩테스트다 모험가 길드 - 그리디
+n = int(input())
+data = list(map(int, input().split()))
+data.sort()
+
+result = 0
+count = 0
+
+for i in data: 
+    count += 1 
+    if count >= i : 
+        result += 1 
+        count = 0 
+
+print(result)
 #%% 프로그래머스 2단계 (위장) - 해시
 #%% 프로그래머스 2단계 (H-index) - 정렬
 #%% 프로그래머스 2단계 (다리를지나는트럭) - 스택큐
 #%% 프로그래머스 2단계 (프린터) - 스택큐
 #%% 프로그래머스 2단계 (타겟넘버) - 깊이너비
+#%% 프로그래머스 2단계 (카펫) - 완전탐색
+# def solution(brown, yellow):
+    # 제곱근을 구하는 형식으로 구현 (12, 6)같은 경우는 오답을 찾음
+    # height = int((brown + yellow) ** 0.5)
+    # width = (brown + yellow) // height
+    # return [width, height]
+def solution(brown, yellow):
+    sum = brown + yellow
+    for height in range(3, sum): #height의 최소값은 3
+        width = sum // height
+        if ((width - 2) * (height - 2)) == yellow and width >= height:
+            return [width, height]
+
+print(solution(12, 6)) # answer > 4, 3
